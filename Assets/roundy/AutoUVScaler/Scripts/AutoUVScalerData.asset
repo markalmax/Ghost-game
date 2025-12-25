@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: AutoUVScalerData
   m_EditorClassIdentifier: Assembly-CSharp::AutoUVScaler.Scripts.AutoUVScalerData
   meshMappings:
-  - gameObjectID: 37332
+  - gameObjectID: 37350
+    originalMeshGUID: 886555c2e679d2842a2698591d1bbe65
+    autoUVMeshAssetPath: 
+  - gameObjectID: -2132
     originalMeshGUID: 0000000000000000e000000000000000
-    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_9925.asset
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_8809.asset
