@@ -7,9 +7,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Vector3 playerVelocity;
     private float gravityValue = Physics.gravity.y;
-    private float InputV;
-    private float InputH;
-    private bool canMove = true;
+    public float InputV;
+    public float InputH;
+    public bool canMove = true;
     public float moveAcceleration = 50.0f;
     public float moveDeacceleration = 0.1f;
     public float maxVelocity = 5.0f;
