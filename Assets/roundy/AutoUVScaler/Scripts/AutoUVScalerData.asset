@@ -16,6 +16,9 @@ MonoBehaviour:
   - gameObjectID: 37350
     originalMeshGUID: 886555c2e679d2842a2698591d1bbe65
     autoUVMeshAssetPath: 
-  - gameObjectID: -2132
-    originalMeshGUID: 0000000000000000e000000000000000
-    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_8809.asset
+  - gameObjectID: 37384
+    originalMeshGUID: 886555c2e679d2842a2698591d1bbe65
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_7775.asset
+  - gameObjectID: 37340
+    originalMeshGUID: 8e0ce4c9b6bc8cd44bf5271d22514009
+    autoUVMeshAssetPath: 

@@ -1,26 +1,38 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
+    private Rigidbody rb;
     private Vector3 playerVelocity;
     private float gravityValue = Physics.gravity.y;
-    public float playerSpeed = 2.0f;
+    private float InputV;
+    private float InputH;
+    private bool canMove = true;
+    public float moveAcceleration = 50.0f;
+    public float moveDeacceleration = 0.1f;
+    public float maxVelocity = 5.0f;
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        rb = gameObject.GetComponent<Rigidbody>();
     }
-
     void Update()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        if (controller.isGrounded && playerVelocity.y < 0)
+        InputH = Input.GetAxis("Horizontal");
+        InputV = Input.GetAxis("Vertical");
+    }
+    void FixedUpdate()
+    {
+        if(canMove)rb.AddForce(new Vector3(InputH, 0 , InputV) * moveAcceleration);
+        if (rb.linearVelocity.magnitude > maxVelocity)
         {
-            playerVelocity.y = 0f;
+            rb.linearVelocity = rb.linearVelocity.normalized * maxVelocity;
         }
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        if (InputH == 0 && InputV == 0)
+        {
+            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, moveDeacceleration);
+        }
     }
 }
