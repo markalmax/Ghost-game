@@ -23,10 +23,6 @@ public class Dashing : MonoBehaviour
         OGMaxVelocity = pm.maxVelocity;
         wallLayer = LayerMask.NameToLayer(wallLayerName);
     }
-    void Update()
-    {
-        
-    }
     public void Dash()
     {
         tr.emitting = true;

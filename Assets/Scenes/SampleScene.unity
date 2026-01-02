@@ -295,9 +295,24 @@ MonoBehaviour:
     - m_Text: Jump
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: Gone
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1005283679}
+        m_TargetAssemblyTypeName: SkillsSystem, Assembly-CSharp
+        m_MethodName: DropDown
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &169233297
 MonoBehaviour:
@@ -711,9 +726,24 @@ MonoBehaviour:
     - m_Text: Jump
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: Gone
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1005283679}
+        m_TargetAssemblyTypeName: SkillsSystem, Assembly-CSharp
+        m_MethodName: DropDown
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &344285702
 MonoBehaviour:
@@ -1316,9 +1346,24 @@ MonoBehaviour:
     - m_Text: Jump
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: Gone
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1005283679}
+        m_TargetAssemblyTypeName: SkillsSystem, Assembly-CSharp
+        m_MethodName: DropDown
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &465476605
 MonoBehaviour:
@@ -2326,9 +2371,11 @@ GameObject:
   - component: {fileID: 1005283676}
   - component: {fileID: 1005283675}
   - component: {fileID: 1005283678}
-  - component: {fileID: 1005283677}
   - component: {fileID: 1005283674}
   - component: {fileID: 1005283679}
+  - component: {fileID: 1005283677}
+  - component: {fileID: 1005283681}
+  - component: {fileID: 1005283680}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2688,12 +2735,42 @@ MonoBehaviour:
   skills: 000000000000000000000000
   skillsScripts:
   - {fileID: 1005283677}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1005283681}
+  - {fileID: 1005283680}
   skillDropdowns:
   - {fileID: 465476604}
   - {fileID: 169233296}
   - {fileID: 344285701}
+--- !u!114 &1005283680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005283668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b89584ecff5ee48bf256548e9b8308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Transparent
+  sr: {fileID: 0}
+  transparency: 0.3
+  cd: 2
+--- !u!114 &1005283681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005283668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e518513c47ca294fbb827089cb9b10b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Jumping
+  jumpForce: 50
+  rb: {fileID: 0}
+  cd: 0.5
 --- !u!1 &1076960484
 GameObject:
   m_ObjectHideFlags: 0
