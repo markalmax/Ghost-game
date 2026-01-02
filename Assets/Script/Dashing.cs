@@ -2,15 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class Skills : MonoBehaviour
+public class Dashing : MonoBehaviour
 {
     public PlayerMovement pm;
     public Rigidbody rb;
     public TrailRenderer tr;
     public float dashDistance = 10f;
-    public float dashSpeed = 10f;
-    public float dashCooldown = 2f;
-    public float dashTimer = 0f;
+    public float dashVelocity = 10f;
+    public float cd = 2f;
     private float maxDashVelocity;
     private float OGMaxVelocity;
     public string wallLayerName = "Wall";
@@ -20,19 +19,15 @@ public class Skills : MonoBehaviour
         pm = gameObject.GetComponent<PlayerMovement>();
         rb = gameObject.GetComponent<Rigidbody>();
         tr = gameObject.GetComponent<TrailRenderer>();
-        maxDashVelocity = dashSpeed;
+        maxDashVelocity = dashVelocity;
         OGMaxVelocity = pm.maxVelocity;
         wallLayer = LayerMask.NameToLayer(wallLayerName);
     }
     void Update()
     {
-        dashTimer -= Time.deltaTime;
-        if(Input.GetButtonDown("Fire1"))
-        {
-            if(dashTimer <= 0f)Dash();
-        }
+        
     }
-    void Dash()
+    public void Dash()
     {
         tr.emitting = true;
         pm.canMove = false; pm.maxVelocity = maxDashVelocity;
@@ -41,13 +36,12 @@ public class Skills : MonoBehaviour
             Physics.IgnoreLayerCollision(gameObject.layer, wallLayer, true);
         }
         Vector3 dashDirection = new Vector3(pm.InputH, 0, pm.InputV).normalized;
-        rb.linearVelocity = dashDirection * dashSpeed;
-        dashTimer = dashCooldown;
+        rb.linearVelocity = dashDirection * dashVelocity;
         StartCoroutine(EndDash());
     }
     public IEnumerator EndDash()
     {
-        yield return new WaitForSeconds(dashDistance / dashSpeed);
+        yield return new WaitForSeconds(dashDistance / dashVelocity);
         pm.canMove = true;
         pm.maxVelocity = OGMaxVelocity;
         if (wallLayer != -1)
@@ -55,5 +49,9 @@ public class Skills : MonoBehaviour
             Physics.IgnoreLayerCollision(gameObject.layer, wallLayer, false);
         }
         tr.emitting = false;
+    }
+    public void UseSkill(int skillId)
+    {
+        Dash();
     }
 }
