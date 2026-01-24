@@ -1,53 +1,40 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+[CreateAssetMenu(menuName ="Ability/Dashing")]
 
-public class Dashing : MonoBehaviour
+public class Dashing : Ability
 {
-    public PlayerMovement pm;
-    public Rigidbody rb;
-    public TrailRenderer tr;
+    PlayerMovement pm;
+    Rigidbody rb;
+    TrailRenderer tr;
     public float dashDistance = 10f;
     public float dashVelocity = 10f;
-    public float cd = 2f;
-    private float maxDashVelocity;
-    private float OGMaxVelocity;
-    public string wallLayerName = "Wall";
-    private int wallLayer = -1;
-    void Start()
+    public float maxDashVelocity;
+    public float OGMaxVelocity;
+    LayerMask wall;
+    public override void UseSkill(GameObject player)
     {
-        pm = gameObject.GetComponent<PlayerMovement>();
-        rb = gameObject.GetComponent<Rigidbody>();
-        tr = gameObject.GetComponent<TrailRenderer>();
+        pm = player.GetComponent<PlayerMovement>();
+        rb = player.GetComponent<Rigidbody>();
+        tr = player.GetComponent<TrailRenderer>();
         maxDashVelocity = dashVelocity;
-        OGMaxVelocity = pm.maxVelocity;
-        wallLayer = LayerMask.NameToLayer(wallLayerName);
-    }
-    public void Dash()
-    {
+        wall = LayerMask.NameToLayer("Wall");
         tr.emitting = true;
-        pm.canMove = false; pm.maxVelocity = maxDashVelocity;
-        if (wallLayer != -1)
-        {
-            Physics.IgnoreLayerCollision(gameObject.layer, wallLayer, true);
-        }
-        Vector3 dashDirection = new Vector3(pm.InputH, 0, pm.InputV).normalized;
+        pm.canMove = false; rb.maxLinearVelocity = maxDashVelocity;
+        Physics.IgnoreLayerCollision(player.layer, wall, true);
+        Vector3 dashDirection = new Vector3(pm.input.x, 0, pm.input.y).normalized;
         rb.linearVelocity = dashDirection * dashVelocity;
-        StartCoroutine(EndDash());
+        
     }
-    public IEnumerator EndDash()
+    public override void EndSkill(GameObject player)
     {
-        yield return new WaitForSeconds(dashDistance / dashVelocity);
+        pm = player.GetComponent<PlayerMovement>();
+        rb = player.GetComponent<Rigidbody>();
+        tr = player.GetComponent<TrailRenderer>();
         pm.canMove = true;
-        pm.maxVelocity = OGMaxVelocity;
-        if (wallLayer != -1)
-        {
-            Physics.IgnoreLayerCollision(gameObject.layer, wallLayer, false);
-        }
+        rb.maxLinearVelocity = OGMaxVelocity;
+        Physics.IgnoreLayerCollision(player.layer, wall, false);
         tr.emitting = false;
-    }
-    public void UseSkill(int skillId)
-    {
-        Dash();
     }
 }

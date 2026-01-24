@@ -7,32 +7,33 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Vector3 playerVelocity;
     private float gravityValue = Physics.gravity.y;
-    public float InputV;
-    public float InputH;
+    public Vector2 input;
     public bool canMove = true;
     public float moveAcceleration = 50.0f;
     public float moveDeacceleration = 0.1f;
     public float maxVelocity = 5.0f;
+    public bool noLimit = false;
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
         rb = gameObject.GetComponent<Rigidbody>();
+        rb.maxLinearVelocity = maxVelocity;
     }
     void Update()
     {
-        InputH = Input.GetAxis("Horizontal");
-        InputV = Input.GetAxis("Vertical");
+        input.x = Input.GetAxis("Horizontal");
+        input.y = Input.GetAxis("Vertical");
     }
     void FixedUpdate()
     {
-        if(canMove)rb.AddForce(new Vector3(InputH, 0 , InputV) * moveAcceleration);
-        if (rb.linearVelocity.magnitude > maxVelocity)
+        if(canMove)rb.AddForce(new Vector3(input.x, 0 , input.y) * moveAcceleration);
+        if (input.x == 0 && input.y == 0)
         {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxVelocity;
-        }
-        if (InputH == 0 && InputV == 0)
-        {
-            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, moveDeacceleration);
+            rb.linearVelocity = new Vector3(
+                Mathf.Lerp(rb.linearVelocity.x, 0, moveDeacceleration),
+                rb.linearVelocity.y,
+                Mathf.Lerp(rb.linearVelocity.z, 0, moveDeacceleration)
+            );
         }
     }
 }

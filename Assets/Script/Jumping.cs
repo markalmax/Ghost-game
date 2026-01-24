@@ -1,20 +1,20 @@
 using UnityEngine;
-
-public class Jumping : MonoBehaviour
+[CreateAssetMenu(menuName ="Ability/Jump")]
+public class Jumping : Ability
 {
     public float jumpForce = 50f;
     public Rigidbody rb;
-    public float cd = 0.5f;
-    void Start()
+    public override void UseSkill(GameObject player)
     {
-        rb = gameObject.GetComponent<Rigidbody>();
-    }
-    public void Jump()
-    {
+        rb = player.GetComponent<Rigidbody>();
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
-    public void UseSkill(int skillId)
+    public override void EndSkill(GameObject player)
     {
-        Jump();
+        
+    }
+    public override bool KeepActive(GameObject player)
+    {
+        return !Physics.Raycast(rb.transform.position, Vector3.down, 1.1f);
     }
 }

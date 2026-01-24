@@ -2,74 +2,86 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Collections.Generic;
 
 public class SkillsSystem : MonoBehaviour
 {
-    public float defaultCD = 2f;
-    public int[] skills = new int[0];
-    public MonoBehaviour[] skillsScripts = new MonoBehaviour[0];
-    public TMP_Dropdown[] skillDropdowns = new TMP_Dropdown[0];
-    private float[] skillCD = new float[0];
-    void Start()
+    [System.Serializable]
+    public class SkillSlot
     {
-        if (skillsScripts == null) skillsScripts = new MonoBehaviour[0];
-        if (skillDropdowns == null) skillDropdowns = new TMP_Dropdown[0];
-        if (skills == null || skills.Length != skillsScripts.Length)
-            skills = new int[skillsScripts.Length];
-        skillCD = new float[skillsScripts.Length];
-        for (int i = 0; i < skillCD.Length; i++) skillCD[i] = 0f;
+        public Ability ability;
+        public KeyCode key;
+        public AbilityState state = AbilityState.ready;
+        public float stateTimer = 0f;
     }
+
+    public enum AbilityState
+    {
+        ready,
+        active,
+        cooldown
+    }
+
+    public List<SkillSlot> skills = new List<SkillSlot>();
 
     void Update()
     {
-        for (int i = 0; i < skillCD.Length; i++)
-            if (skillCD[i] > 0f)
-                skillCD[i] -= Time.deltaTime;
-        if (Input.GetButtonDown("Fire1")) ActivateSkill(0);
-        if (Input.GetButtonDown("Fire2")) ActivateSkill(1);
-        if (Input.GetButtonDown("Fire3")) ActivateSkill(2);
+        for (int i = 0; i < skills.Count; i++)
+        {
+            UpdateSkill(i);
+        }
     }
 
-    public void DropDown(int index)
+    void UpdateSkill(int skillIndex)
     {
-        var go = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
-        if (go != null)
+        SkillSlot skill = skills[skillIndex];
+        if (skill.ability == null) return;
+
+        switch (skill.state)
         {
-            for (int i = 0; i < skillDropdowns.Length; i++)
-            {
-                var dd = skillDropdowns[i];
-                if (dd != null && dd.gameObject == go)
+            case AbilityState.ready:
+                if (Input.GetKeyDown(skill.key))
                 {
-                    if (i < skills.Length) skills[i] = index;
-                    else Debug.LogWarning("skills array too small for slot " + i);
-                    return;
+                    skill.ability.UseSkill(gameObject);
+                    skill.state = AbilityState.active;
+                    skill.stateTimer = skill.ability.activetime;
                 }
-            }
+                break;
+            case AbilityState.active:
+                skill.stateTimer -= Time.deltaTime;
+                if (skill.stateTimer <= 0)
+                {
+                    if (!skill.ability.KeepActive(gameObject))
+                    {
+                        skill.ability.EndSkill(gameObject);
+                        skill.state = AbilityState.cooldown;
+                        skill.stateTimer = skill.ability.CD;
+                    }
+                }
+                break;
+            case AbilityState.cooldown:
+                skill.stateTimer -= Time.deltaTime;
+                if (skill.stateTimer <= 0)
+                {
+                    skill.state = AbilityState.ready;
+                }
+                break;
         }
-        if (skills.Length > 0) skills[0] = index;
     }
 
-    void ActivateSkill(int slot)
+    public void AddSkill(Ability ability, KeyCode key)
     {
-        if (skills == null || slot < 0 || slot >= skills.Length) return;
-        if (slot < skillCD.Length && skillCD[slot] > 0f)
-        {
-            Debug.Log("Skill slot " + slot + " is on cooldown: " + skillCD[slot].ToString("F2") + "s");
-            return;
-        }
-        int skillId = skills[slot];
-        if (skillsScripts != null && slot < skillsScripts.Length && skillsScripts[slot] != null)
-        {
-            float cd = defaultCD;
-            var f = skillsScripts[slot].GetType().GetField("cd");
-            if (f != null)
-            {
-                object val = f.GetValue(skillsScripts[slot]);
-                cd = (float)val;
-            }
-            skillsScripts[slot].SendMessage("UseSkill", skillId, SendMessageOptions.DontRequireReceiver);
-            if (slot < skillCD.Length)
-                skillCD[slot] = cd;
-        }
+        skills.Add(new SkillSlot { ability = ability, key = key });
+    }
+
+    public void RemoveSkill(int skillIndex)
+    {
+        if (skillIndex >= 0 && skillIndex < skills.Count)
+            skills.RemoveAt(skillIndex);
+    }
+
+    public SkillSlot GetSkill(int skillIndex)
+    {
+        return skillIndex >= 0 && skillIndex < skills.Count ? skills[skillIndex] : null;
     }
 }
