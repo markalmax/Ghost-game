@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Hard Wall
+  - Ground
   - Water
   - UI
+  - Hard wall
   - Wall
-  - 
-  - 
-  - 
+  - Enemie
+  - Player
   - 
   - 
   - 

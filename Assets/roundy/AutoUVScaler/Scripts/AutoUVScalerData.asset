@@ -25,6 +25,6 @@ MonoBehaviour:
   - gameObjectID: -56816
     originalMeshGUID: 49878710c288242408ffd4d2c12e9c79
     autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_1437.asset
-  - gameObjectID: -61832
+  - gameObjectID: 37800
     originalMeshGUID: 0000000000000000e000000000000000
-    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_2763.asset
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_1290.asset
