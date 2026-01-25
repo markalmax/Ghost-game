@@ -10,6 +10,9 @@ public class AIDetection : MonoBehaviour
     public EnemyState state;
     [Header("Patroling")]
     public Vector3 walkPoint;
+    public GameObject point;
+    public Transform[] points;
+    public int pointIndex;
     public bool walkPointSet;
     public float walkPointRange;
     [Header("Sight")]
@@ -26,6 +29,12 @@ public class AIDetection : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         Ground = LayerMask.GetMask("Ground");
+        point = GameObject.Find("point");
+        points = new Transform[point.transform.childCount];
+        for (int i = 0; i < point.transform.childCount; i++)
+        {
+            points[i] = point.transform.GetChild(i);
+        }
     }
 
     private void Update()
@@ -47,9 +56,12 @@ public class AIDetection : MonoBehaviour
     
     void Patroling()
     {
-        if (!walkPointSet)SearchWalkPoint();
+        if (!walkPointSet)SetWalkPoint();
         if (walkPointSet)agent.SetDestination(walkPoint);
-        if (agent.remainingDistance<1f)walkPointSet = false;
+        if (agent.remainingDistance<1f){
+            walkPointSet = false;
+            pointIndex++;
+        }    
     }
     void ChasePlayer()
     {
@@ -60,17 +72,29 @@ public class AIDetection : MonoBehaviour
             walkPointSet = true;
         }    
     }
+    void SetWalkPoint()
+    {
+        if (pointIndex >= points.Length)
+        {
+            pointIndex = 0;
+            walkPoint = points[0].position;
+        } 
+        else walkPoint = points[pointIndex].position;
+        walkPointSet = true;
+    }
     void SearchWalkPoint()
     {
         walkPoint = new Vector3(transform.position.x + Random.Range(-walkPointRange, walkPointRange), transform.position.y, transform.position.z + Random.Range(-walkPointRange, walkPointRange));
         if (Physics.Raycast(walkPoint, -transform.up, out RaycastHit hit, 2f)){
             if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) walkPointSet = true;
         }
-           
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+        if(playerInSight)Gizmos.color = Color.red;
+        else Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, player.transform.position);
     }
 }
