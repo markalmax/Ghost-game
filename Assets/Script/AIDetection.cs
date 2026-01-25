@@ -49,20 +49,20 @@ public class AIDetection : MonoBehaviour
     {
         if (!walkPointSet)SearchWalkPoint();
         if (walkPointSet)agent.SetDestination(walkPoint);
-        if (agent.remainingDistance<1f)
-            walkPointSet = false;
+        if (agent.remainingDistance<1f)walkPointSet = false;
     }
     void ChasePlayer()
     {
         if(playerInSight)agent.SetDestination(player.transform.position);
-        else state = EnemyState.patroling;
+        else {
+            state = EnemyState.patroling;
+            walkPoint = player.transform.position;
+            walkPointSet = true;
+        }    
     }
     void SearchWalkPoint()
     {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        walkPoint = new Vector3(transform.position.x + Random.Range(-walkPointRange, walkPointRange), transform.position.y, transform.position.z + Random.Range(-walkPointRange, walkPointRange));
         if (Physics.Raycast(walkPoint, -transform.up, out RaycastHit hit, 2f)){
             if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) walkPointSet = true;
         }
