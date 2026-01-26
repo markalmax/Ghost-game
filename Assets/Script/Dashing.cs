@@ -10,18 +10,16 @@ public class Dashing : Ability
     TrailRenderer tr;
     public float dashDistance = 10f;
     public float dashVelocity = 10f;
-    public float maxDashVelocity;
-    public float OGMaxVelocity;
     LayerMask wall;
     public override void UseSkill(GameObject player)
     {
         pm = player.GetComponent<PlayerMovement>();
         rb = player.GetComponent<Rigidbody>();
         tr = player.GetComponent<TrailRenderer>();
-        maxDashVelocity = dashVelocity;
         wall = LayerMask.NameToLayer("Wall");
         tr.emitting = true;
-        pm.canMove = false; rb.maxLinearVelocity = maxDashVelocity;
+        pm.canMove = false; 
+        pm.noLimit = true;
         Physics.IgnoreLayerCollision(player.layer, wall, true);
         Vector3 dashDirection = new Vector3(pm.input.x, 0, pm.input.y).normalized;
         rb.linearVelocity = dashDirection * dashVelocity;
@@ -33,7 +31,7 @@ public class Dashing : Ability
         rb = player.GetComponent<Rigidbody>();
         tr = player.GetComponent<TrailRenderer>();
         pm.canMove = true;
-        rb.maxLinearVelocity = OGMaxVelocity;
+        pm.noLimit = false;
         Physics.IgnoreLayerCollision(player.layer, wall, false);
         tr.emitting = false;
     }

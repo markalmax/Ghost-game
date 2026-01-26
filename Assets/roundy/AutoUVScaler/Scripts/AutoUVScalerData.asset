@@ -13,18 +13,9 @@ MonoBehaviour:
   m_Name: AutoUVScalerData
   m_EditorClassIdentifier: Assembly-CSharp::AutoUVScaler.Scripts.AutoUVScalerData
   meshMappings:
-  - gameObjectID: 37350
-    originalMeshGUID: 886555c2e679d2842a2698591d1bbe65
-    autoUVMeshAssetPath: 
-  - gameObjectID: 37384
-    originalMeshGUID: 886555c2e679d2842a2698591d1bbe65
-    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_7775.asset
-  - gameObjectID: 37340
-    originalMeshGUID: 8e0ce4c9b6bc8cd44bf5271d22514009
-    autoUVMeshAssetPath: 
-  - gameObjectID: -56816
-    originalMeshGUID: 49878710c288242408ffd4d2c12e9c79
-    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_1437.asset
-  - gameObjectID: 37862
+  - gameObjectID: -48076
     originalMeshGUID: 4aee51e3ffa352a4f86c0f15e9536aad
-    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_3880.asset
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_5843.asset
+  - gameObjectID: 44644
+    originalMeshGUID: 7b224230340f87a4fb31730e3fd5adaf
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_8717.asset

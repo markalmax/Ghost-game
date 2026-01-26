@@ -8,6 +8,7 @@ public class AIDetection : MonoBehaviour
     public GameObject player;
     public LayerMask Ground;
     public EnemyState state;
+    public AudioSource wind;
     [Header("Patroling")]
     public Vector3 walkPoint;
     public GameObject point;
@@ -22,14 +23,17 @@ public class AIDetection : MonoBehaviour
     {
         patroling,
         chasing,
+        lost,
         attacking
     }
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        wind = GetComponent<AudioSource>();
         player = GameObject.FindWithTag("Player");
         Ground = LayerMask.GetMask("Ground");
         point = GameObject.Find("point");
+        
         points = new Transform[point.transform.childCount];
         for (int i = 0; i < point.transform.childCount; i++)
         {
@@ -46,6 +50,9 @@ public class AIDetection : MonoBehaviour
                 break;
             case EnemyState.chasing:
                 ChasePlayer();
+                break;
+            case EnemyState.lost:
+                LostPlayer();
                 break;
         }
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, 1 << player.layer);
@@ -66,10 +73,15 @@ public class AIDetection : MonoBehaviour
     void ChasePlayer()
     {
         if(playerInSight)agent.SetDestination(player.transform.position);
-        else {
-            state = EnemyState.patroling;
-            walkPoint = player.transform.position;
-            walkPointSet = true;
+        else state = EnemyState.lost;
+    }
+    void LostPlayer()
+    {
+        walkPoint = player.transform.position;walkPointSet = true;
+        if (agent.remainingDistance<1f){
+        walkPointSet = false;
+        wind.Play();
+        state = EnemyState.patroling;
         }    
     }
     void SetWalkPoint()
