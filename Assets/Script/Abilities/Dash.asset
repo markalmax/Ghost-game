@@ -17,5 +17,4 @@ MonoBehaviour:
   activetime: 0.5
   dashDistance: 10
   dashVelocity: 10
-  maxDashVelocity: 10
-  OGMaxVelocity: 5
+  sound: {fileID: 8300000, guid: 93b6e00debdb57543bc28c3e429fe4b6, type: 3}

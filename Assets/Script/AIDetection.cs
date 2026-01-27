@@ -8,7 +8,7 @@ public class AIDetection : MonoBehaviour
     public GameObject player;
     public LayerMask Ground;
     public EnemyState state;
-    public AudioSource wind;
+    public AudioSource ass;
     [Header("Patroling")]
     public Vector3 walkPoint;
     public GameObject point;
@@ -19,6 +19,10 @@ public class AIDetection : MonoBehaviour
     [Header("Sight")]
     public float sightRange;
     public bool playerInSightRange,playerInSight;   
+    [Header("Audio")]
+    public AudioClip wind;
+    public AudioClip chase;
+
     public enum EnemyState
     {
         patroling,
@@ -29,7 +33,7 @@ public class AIDetection : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        wind = GetComponent<AudioSource>();
+        ass = GetComponent<AudioSource>();
         player = GameObject.FindWithTag("Player");
         Ground = LayerMask.GetMask("Ground");
         point = GameObject.Find("point");
@@ -58,7 +62,11 @@ public class AIDetection : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, 1 << player.layer);
         if (Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized, out RaycastHit hit, Vector3.Distance(transform.position, player.transform.position))) playerInSight = hit.collider.gameObject == player;
         else playerInSight = false;
-        if (playerInSightRange && state == EnemyState.patroling && playerInSight)state = EnemyState.chasing;
+        if (playerInSightRange && state == EnemyState.patroling && playerInSight){
+            state = EnemyState.chasing;
+            ass.clip = chase;
+            ass.Play();
+        }
     }
     
     void Patroling()
@@ -78,11 +86,13 @@ public class AIDetection : MonoBehaviour
     void LostPlayer()
     {
         walkPoint = player.transform.position;walkPointSet = true;
-        if (agent.remainingDistance<1f){
+        if (agent.remainingDistance<1f&&!playerInSight){
         walkPointSet = false;
-        wind.Play();
+        ass.clip = wind;
+        ass.Play();
         state = EnemyState.patroling;
-        }    
+        }
+        else if(playerInSight)state = EnemyState.chasing;    
     }
     void SetWalkPoint()
     {

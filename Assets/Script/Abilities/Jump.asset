@@ -15,5 +15,6 @@ MonoBehaviour:
   name: Jumping
   CD: 1
   activetime: 0
-  jumpForce: 50
+  jumpForce: 5
   rb: {fileID: 0}
+  sound: {fileID: 8300000, guid: 4bb22d034aecb954ab7c81c55b6cdb53, type: 3}
