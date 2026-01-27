@@ -13,7 +13,7 @@ public class Dashing : Ability
     public float dashVelocity = 10f;
     public AudioClip sound;
     LayerMask wall;
-        public override void UseSkill(GameObject player)
+    public override void UseSkill(GameObject player)
     {
         pm = player.GetComponent<PlayerMovement>();
         rb = player.GetComponent<Rigidbody>();

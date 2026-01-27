@@ -73,11 +73,17 @@ public class SkillsSystem : MonoBehaviour
     {
         skills.Add(new SkillSlot { ability = ability, key = key });
     }
-
-    public void RemoveSkill(int skillIndex)
+    public void ChangeSkill(int skillIndex, Ability ability, KeyCode key)
     {
         if (skillIndex >= 0 && skillIndex < skills.Count)
-            skills.RemoveAt(skillIndex);
+        {
+            skills[skillIndex].ability = ability;
+            skills[skillIndex].key = key;
+        }
+    }
+    public void RemoveSkill(int skillIndex)
+    {
+        if (skillIndex >= 0 && skillIndex < skills.Count) skills.RemoveAt(skillIndex);
     }
 
     public SkillSlot GetSkill(int skillIndex)
