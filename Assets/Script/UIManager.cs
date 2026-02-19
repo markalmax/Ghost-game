@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     {
         player=GameObject.FindGameObjectWithTag("Player");
         ss = player.GetComponent<SkillsSystem>();
+        idm = player.GetComponent<IDManager>();
         foreach (var dd in dropdowns)
         {
             List<string> options = new List<string>();

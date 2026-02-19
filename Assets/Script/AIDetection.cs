@@ -37,11 +37,13 @@ public class AIDetection : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         Ground = LayerMask.GetMask("Ground");
         point = GameObject.Find("point");
-        
-        points = new Transform[point.transform.childCount];
-        for (int i = 0; i < point.transform.childCount; i++)
+        if (points != null)
         {
-            points[i] = point.transform.GetChild(i);
+        points = new Transform[point.transform.childCount];
+            for (int i = 0; i < point.transform.childCount; i++)
+            {
+                points[i] = point.transform.GetChild(i);
+            }
         }
     }
 
@@ -71,11 +73,14 @@ public class AIDetection : MonoBehaviour
     
     void Patroling()
     {
-        if (!walkPointSet)SetWalkPoint();
+        if (!walkPointSet){
+            if (points.Length == 0) SearchWalkPoint();
+            SetWalkPoint();
+        }
         if (walkPointSet)agent.SetDestination(walkPoint);
         if (agent.remainingDistance<1f){
             walkPointSet = false;
-            pointIndex++;
+            if (points.Length > 0) pointIndex++;
         }    
     }
     void ChasePlayer()

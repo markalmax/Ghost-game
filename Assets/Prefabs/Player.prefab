@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3049576088647661480}
   - component: {fileID: 6367368463408558060}
   - component: {fileID: 1098205776989280557}
+  - component: {fileID: 6834521581654824985}
   - component: {fileID: 6353173743748089786}
   - component: {fileID: 7191523843583189680}
   m_Layer: 9
@@ -367,6 +368,23 @@ MonoBehaviour:
     key: 99
     state: 0
     stateTimer: 0
+--- !u!114 &6834521581654824985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867237726457117739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634c1bbf18b349240b758ce185c145cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IDManager
+  abilities:
+  - {fileID: 11400000, guid: 200048ab30ee9d549b30b40394f1f4a1, type: 2}
+  - {fileID: 11400000, guid: cc966be163ee31941b615c18657d8db9, type: 2}
+  - {fileID: 11400000, guid: 4255225eeabc6954d852bfa3f3230c7c, type: 2}
+  - {fileID: 11400000, guid: 3afb7e9886bf7c6468915f5ef1f6bd5c, type: 2}
 --- !u!81 &6353173743748089786
 AudioListener:
   m_ObjectHideFlags: 0
