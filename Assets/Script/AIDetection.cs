@@ -9,6 +9,7 @@ public class AIDetection : MonoBehaviour
     public LayerMask Ground;
     public EnemyState state;
     public AudioSource ass;
+    public Animator anim;
     [Header("Patroling")]
     public Vector3 walkPoint;
     public GameObject point;
@@ -34,6 +35,7 @@ public class AIDetection : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         ass = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
         player = GameObject.FindWithTag("Player");
         Ground = LayerMask.GetMask("Ground");
         point = GameObject.Find("point");
@@ -45,6 +47,7 @@ public class AIDetection : MonoBehaviour
                 points[i] = point.transform.GetChild(i);
             }
         }
+        anim.SetBool("IsMoving", true);
     }
 
     private void Update()
