@@ -61,3 +61,45 @@ MonoBehaviour:
   - gameObjectID: -82052
     originalMeshGUID: 7ef19077f207ff242a5fa1e6eb1c303c
     autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_1259.asset
+  - gameObjectID: -126560
+    originalMeshGUID: 0000000000000000e000000000000000
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_9742.asset
+  - gameObjectID: -133376
+    originalMeshGUID: 54e19d94788802e479990312e5b74aa0
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_2588.asset
+  - gameObjectID: -133372
+    originalMeshGUID: c0c69238622698245a709db275006cf7
+    autoUVMeshAssetPath: 
+  - gameObjectID: -140712
+    originalMeshGUID: 54e19d94788802e479990312e5b74aa0
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_8042.asset
+  - gameObjectID: -140696
+    originalMeshGUID: c0c69238622698245a709db275006cf7
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_8508.asset
+  - gameObjectID: -140720
+    originalMeshGUID: bc19aabed794bcf4fa9659d4ff6752fc
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_9580.asset
+  - gameObjectID: 52874
+    originalMeshGUID: 0000000000000000e000000000000000
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_5574.asset
+  - gameObjectID: -126752
+    originalMeshGUID: 1ae6c892c3fb7e5438c9de3045befddb
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_2446.asset
+  - gameObjectID: -106336
+    originalMeshGUID: a3a6da9fdd5fa0c42a3cc03797081db1
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_1141.asset
+  - gameObjectID: -106342
+    originalMeshGUID: 881efbd4440e75f4a8f849d78017cf34
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_9511.asset
+  - gameObjectID: 53160
+    originalMeshGUID: e5ed4ddf754cfc84da29ad602e0a1524
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Plane_AutoUV_6300.asset
+  - gameObjectID: 39882
+    originalMeshGUID: e5ed4ddf754cfc84da29ad602e0a1524
+    autoUVMeshAssetPath: 
+  - gameObjectID: -112406
+    originalMeshGUID: a3a6da9fdd5fa0c42a3cc03797081db1
+    autoUVMeshAssetPath: Assets/roundy/AutoUVScaler/Meshes/Cube_AutoUV_6449.asset
+  - gameObjectID: -106338
+    originalMeshGUID: e39ddb6b1d8e7934f9d5dcb96e6e7c6d
+    autoUVMeshAssetPath: 
