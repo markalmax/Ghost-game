@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Jump
   m_EditorClassIdentifier: Assembly-CSharp::Jumping
   name: Jumping
+  description: the Y axis exists too
+  icon: {fileID: 21300000, guid: 89e6f38f43c5a5445bd0f77c81efbc5a, type: 3}
   CD: 1
   activetime: 0
   jumpForce: 5
   rb: {fileID: 0}
+  ass: {fileID: 0}
   sound: {fileID: 8300000, guid: 4bb22d034aecb954ab7c81c55b6cdb53, type: 3}

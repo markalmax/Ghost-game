@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: 67
   m_EditorClassIdentifier: Assembly-CSharp::_67
   name: 67
-  CD: 0
-  activetime: 0
+  description: Distress your enemies with a loud roar
+  icon: {fileID: 21300000, guid: d1990c6bcfee0c647afcc9945de984c6, type: 3}
+  CD: 5
+  activetime: 1
   sound: {fileID: 8300000, guid: 869f72192935c7d4abb287faabdf1972, type: 3}

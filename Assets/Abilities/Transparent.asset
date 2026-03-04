@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Transparent
   m_EditorClassIdentifier: Assembly-CSharp::Transparent
   name: Transparent
+  description: '[Stackable] Reducing the enemies detection range.'
+  icon: {fileID: 21300000, guid: 97d376bf78a467a43ac61226df5f56b5, type: 3}
   CD: 3
   activetime: 1
   sr: {fileID: 0}

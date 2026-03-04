@@ -13,16 +13,15 @@ public class UIManager : MonoBehaviour
     {
         player=GameObject.FindGameObjectWithTag("Player");
         ss = player.GetComponent<SkillsSystem>();
-        idm = player.GetComponent<IDManager>();
+        idm = FindFirstObjectByType<IDManager>();
         foreach (var dd in dropdowns)
         {
-            List<string> options = new List<string>();
+            dd.ClearOptions();
             foreach (var ability in idm.abilities)
             {
-                options.Add(ability.name);
+                dd.options.Add(new TMP_Dropdown.OptionData(ability.name, ability.icon,Color.black));
             }
-            dd.ClearOptions();
-            dd.AddOptions(options);
+            Debug.Log(dd.options);
         }
         foreach (TMP_Dropdown dd in dropdowns)
         {
