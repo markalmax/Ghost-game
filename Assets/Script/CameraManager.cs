@@ -1,17 +1,29 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public GameObject player;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-    }
+    [SerializeField]CinemachineCamera CC;
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter(Collision collision)
     {
-        transform.LookAt(player.transform);
+        
+    }
+    void OnCollisionExit(Collision collision)
+    {
+        if(CC != null)
+        {
+            CC.enabled = false;
+        }
+    }
+    void OnCollisionStay(Collision collision)
+    {
+        if(collision.transform.parent.GetComponentInChildren<CinemachineCamera>() != null)
+        {
+            CC = collision.transform.parent.GetComponentInChildren<CinemachineCamera>();
+
+            CC.Follow = FindAnyObjectByType<PlayerMovement>().transform;
+            CC.enabled = true;
+        }
     }
 }
