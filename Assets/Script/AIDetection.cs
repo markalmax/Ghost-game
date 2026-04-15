@@ -18,8 +18,8 @@ public class AIDetection : MonoBehaviour
     public bool walkPointSet;
     public float walkPointRange;
     [Header("Sight")]
-    public float sightRange;
-    public bool playerInSightRange,playerInSight;   
+    public float sightRange,attackRange;
+    public bool playerInSightRange,playerInSight,playerInAttackRange;   
     [Header("Audio")]
     public AudioClip wind;
     public AudioClip chase;
@@ -29,7 +29,8 @@ public class AIDetection : MonoBehaviour
         patroling,
         chasing,
         lost,
-        attacking
+        attacking,
+        stunned
     }
     private void Start()
     {
@@ -63,14 +64,23 @@ public class AIDetection : MonoBehaviour
             case EnemyState.lost:
                 LostPlayer();
                 break;
+            case EnemyState.attacking:
+                Attacking();
+                break;
+            case EnemyState.stunned:
+                break;    
         }
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, 1 << player.layer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, 1 << player.layer);
         if (Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized, out RaycastHit hit, Vector3.Distance(transform.position, player.transform.position))) playerInSight = hit.collider.gameObject == player;
         else playerInSight = false;
         if (playerInSightRange && state == EnemyState.patroling && playerInSight){
             state = EnemyState.chasing;
             ass.clip = chase;
             ass.Play();
+        }
+        if (playerInAttackRange && state == EnemyState.chasing && playerInSight){
+            state = EnemyState.attacking;
         }
     }
     
@@ -102,6 +112,14 @@ public class AIDetection : MonoBehaviour
         }
         else if(playerInSight)state = EnemyState.chasing;    
     }
+    void Stunned(float duration)
+    {
+        
+    }
+    void Attacking()
+    {
+        player.GetComponent<PlayerMovement>().canMove = false;
+    }
     void SetWalkPoint()
     {
         if (pointIndex >= points.Length)
@@ -123,6 +141,8 @@ public class AIDetection : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
         if(playerInSight)Gizmos.color = Color.red;
         else Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, player.transform.position);
