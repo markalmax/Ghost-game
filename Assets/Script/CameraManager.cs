@@ -18,12 +18,11 @@ public class CameraManager : MonoBehaviour
     }
     void OnCollisionStay(Collision collision)
     {
-        if(collision.transform.parent.GetComponentInChildren<CinemachineCamera>() != null)
-        {
-            CC = collision.transform.parent.GetComponentInChildren<CinemachineCamera>();
+        if (collision.transform == null)return;
+        if (collision.transform.GetComponentInChildren<CinemachineCamera>() == null)return;
 
-            CC.Follow = FindAnyObjectByType<PlayerMovement>().transform;
-            CC.enabled = true;
-        }
+        CC = collision.transform.GetComponentInChildren<CinemachineCamera>();
+        CC.Follow = gameObject.transform;
+        CC.enabled = true;
     }
 }
