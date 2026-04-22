@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Camera
+  - Key
+  - Door
+  - Enemie
   layers:
   - Default
   - TransparentFX

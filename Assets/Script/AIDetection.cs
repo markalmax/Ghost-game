@@ -40,13 +40,10 @@ public class AIDetection : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         Ground = LayerMask.GetMask("Ground");
         point = GameObject.Find("point");
-        if (points != null)
-        {
         points = new Transform[point.transform.childCount];
-            for (int i = 0; i < point.transform.childCount; i++)
-            {
-                points[i] = point.transform.GetChild(i);
-            }
+        for (int i = 0; i < point.transform.childCount; i++)
+        {
+            points[i] = point.transform.GetChild(i);
         }
         anim.SetBool("IsMoving", true);
     }
